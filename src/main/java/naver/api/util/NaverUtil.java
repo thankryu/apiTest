@@ -31,7 +31,7 @@ public class NaverUtil {
                 .append(space)
                 .append(dto.getUrl())
                 .append(newLine)
-                .append(dto.getTimestamp().getTime())
+                .append(dto.getTimestamp())
                 .append(newLine)
                 .append(accessKey)
                 .toString();
