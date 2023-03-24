@@ -1,4 +1,4 @@
-package naver.api.alim;
+package naver.api.push;
 
 import lombok.Data;
 
