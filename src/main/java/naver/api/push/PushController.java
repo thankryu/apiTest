@@ -18,7 +18,7 @@ public class PushController {
 
     /**
      * push 메시지 발송
-     * @param SignatureDto
+     * @param NaverPushDto
      * @return
      */
     @PostMapping("/sendPush")
