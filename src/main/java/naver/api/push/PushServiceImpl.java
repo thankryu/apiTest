@@ -38,7 +38,7 @@ public class PushServiceImpl implements PushService{
      * @throws Exception
      */
     @Override
-    public void sendPush(NaverPushDto pushDto) throws Exception{
+    public void sendNaverPush(NaverPushDto pushDto) throws Exception{
 
         // 1. 발송 Url 및 Header Setting
 

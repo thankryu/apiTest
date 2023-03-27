@@ -21,9 +21,9 @@ public class PushController {
      * @param NaverPushDto
      * @return
      */
-    @PostMapping("/sendPush")
-    public ResponseEntity sendPush(NaverPushDto naverPushDto) throws Exception{
-        pushService.sendPush(naverPushDto);
+    @PostMapping("/sendNaverPush")
+    public ResponseEntity sendNaverPush(NaverPushDto naverPushDto) throws Exception{
+        pushService.sendNaverPush(naverPushDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
