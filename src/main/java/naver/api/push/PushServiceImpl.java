@@ -19,9 +19,13 @@ public class PushServiceImpl implements PushService{
     // 네이버 발송 키
     @Value("${naver-access-key}") String accessKey;
     @Value("${naver-service-id}") String serviceId;
+    @Value("${fcm-key}") String fcmKey;
+    @Value("${fcm-reg-id}") String fcmRegId;
 
     private String url = "/push/v2/services/";
     private String preUrl= "https://sens.apigw.ntruss.com";
+
+    private String fcmUrl ="https://fcm.googleapis.com/fcm/send";
 
     @Autowired
     RestTemplate restTemplate;
@@ -78,6 +82,31 @@ public class PushServiceImpl implements PushService{
         System.out.println(response.getBody());
         
         // 3. 발송 결과값 저장
+    }
+
+    /**
+     * FCM 알람 다이렉트 전송
+     * @param params
+     * @throws Exception
+     */
+    @Override
+    public void sendFcmPush(PushFcmParams params) throws Exception {
+        PushFcmDto pushFcmDto = PushFcmDto.builder()
+                .to(fcmRegId)
+                .priority("high")
+                .notification(params)
+                .build();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.set("Authorization", "key="+fcmKey);
+
+        HttpEntity<?> httpEntity = new HttpEntity<>(toJson(pushFcmDto), httpHeaders);
+
+        ResponseEntity<FcmResponseDto> response =
+                restTemplate.exchange(fcmUrl, HttpMethod.POST, httpEntity,  FcmResponseDto.class);
+
+        log.info(response.getBody().toString());
     }
 
     /**

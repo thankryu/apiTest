@@ -26,4 +26,16 @@ public class PushController {
         pushService.sendNaverPush(naverPushDto);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    /**
+     * FCM Push 발송기
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sendFCMPush")
+    public ResponseEntity sendFcmPush(PushFcmParams params) throws Exception{
+        pushService.sendFcmPush(params);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
