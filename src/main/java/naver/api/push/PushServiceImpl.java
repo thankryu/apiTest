@@ -106,7 +106,14 @@ public class PushServiceImpl implements PushService{
         ResponseEntity<FcmResponseDto> response =
                 restTemplate.exchange(fcmUrl, HttpMethod.POST, httpEntity,  FcmResponseDto.class);
 
+        if(200 != response.getStatusCodeValue()){
+            throw new Exception("FCM 푸시 전송이 실패했습니다.");
+        }
+
         log.info(response.getBody().toString());
+        
+        // TODO 푸시 결과 저장
+
     }
 
     /**
