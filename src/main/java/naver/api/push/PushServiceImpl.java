@@ -90,7 +90,7 @@ public class PushServiceImpl implements PushService{
      * @throws Exception
      */
     @Override
-    public void sendFcmPush(PushFcmParams params) throws Exception {
+    public String sendFcmPush(PushFcmParams params) throws Exception {
         PushFcmDto pushFcmDto = PushFcmDto.builder()
                 .to(fcmRegId)
                 .priority("high")
@@ -111,9 +111,16 @@ public class PushServiceImpl implements PushService{
         }
 
         log.info(response.getBody().toString());
-        
-        // TODO 푸시 결과 저장
 
+        FcmResponseDto dto = response.getBody();
+
+        if(dto.getSuccess() <= 0){ // 모두 실패
+            return "fail";
+        } else if(dto.getFailure() <= 0 ) { // 모두 성공
+            return "success";
+        } else { // 부분 성공
+            return "someSuccess";
+        }
     }
 
     /**

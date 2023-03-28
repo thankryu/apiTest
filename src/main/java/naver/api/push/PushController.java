@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RequestMapping("/push")
 @RestController
 public class PushController {
@@ -34,8 +36,8 @@ public class PushController {
      * @throws Exception
      */
     @PostMapping("/sendFCMPush")
-    public ResponseEntity sendFcmPush(PushFcmParams params) throws Exception{
-        pushService.sendFcmPush(params);
-        return new ResponseEntity(HttpStatus.OK);
+    public String sendFcmPush(PushFcmParams params) throws Exception{
+        String result = pushService.sendFcmPush(params);
+        return result;
     }
 }

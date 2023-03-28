@@ -4,5 +4,5 @@ public interface PushService {
 
     void sendNaverPush(NaverPushDto dto) throws Exception;
 
-    void sendFcmPush(PushFcmParams params) throws Exception;
+    String sendFcmPush(PushFcmParams params) throws Exception;
 }
